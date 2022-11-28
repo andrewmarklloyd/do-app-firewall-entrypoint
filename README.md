@@ -4,6 +4,13 @@ Digital Ocean does not support configuring a Droplet's firewall to allow inbound
 
 This utility can be used in the entrypoint of a Docker container running on the Digital Ocean App Platform. It will add the IP address of the App Platform container to the allowed inbound list.
 
+## Required Environment Variables
+
+STATIC_INBOUND_IP: ip address to keep in the inbound rules
+FIREWALL_NAME: name of the firewall in Digital Ocean to update
+FIREWALL_PORT: port of the firewall to match against
+DO_ACCESS_TOKEN: access token to update the Digital Ocean firewall
+
 ## Example
 
 Use an entrypoint script similar to below:
