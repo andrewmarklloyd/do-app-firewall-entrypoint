@@ -25,8 +25,11 @@ Use an entrypoint script similar to below:
 
 /app/do-app-firewall-entrypoint
 
-unset DO_TOKEN
-unset DO_FIREWALL_ID
+# best to unset these variables before running the app
+unset STATIC_INBOUND_IP
+unset FIREWALL_NAME
+unset FIREWALL_PORT
+unset DO_ACCESS_TOKEN
 
 <path-to-app-binary>
 ```
