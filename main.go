@@ -104,5 +104,6 @@ func getIP() (string, error) {
 		return "", fmt.Errorf("reading response body from getting own ip address: %s", err)
 	}
 
-	return string(resBody), nil
+	trimmed := strings.TrimSpace(strings.TrimSuffix(string(resBody), "\n"))
+	return trimmed, nil
 }
