@@ -7,7 +7,7 @@ This utility can be used in the entrypoint of a Docker container running on the 
 ## Required Environment Variables
 
 ```
-STATIC_INBOUND_IP: ip address to keep in the inbound rules
+STATIC_INBOUND_IPS: comma delimited list of ip addresses to keep in the inbound rules
 
 FIREWALL_NAME: name of the firewall in Digital Ocean to update
 
@@ -26,7 +26,7 @@ Use an entrypoint script similar to below:
 /app/do-app-firewall-entrypoint
 
 # best to unset these variables before running the app
-unset STATIC_INBOUND_IP
+unset STATIC_INBOUND_IPS
 unset FIREWALL_NAME
 unset FIREWALL_PORT
 unset DO_ACCESS_TOKEN

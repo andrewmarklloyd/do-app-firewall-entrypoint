@@ -7,16 +7,22 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/digitalocean/godo"
 )
 
-var staticInboundIP string
+var staticInboundIPs []string
 
 func main() {
-	staticInboundIP = os.Getenv("STATIC_INBOUND_IP")
-	if staticInboundIP == "" {
-		log.Fatalln("STATIC_INBOUND_IP env var must be set")
+	staticInboundIPsEnvVar := os.Getenv("STATIC_INBOUND_IPS")
+	if staticInboundIPsEnvVar == "" {
+		log.Fatalln("STATIC_INBOUND_IPS env var must be set")
+	}
+
+	staticInboundIPs = strings.Split(staticInboundIPsEnvVar, ",")
+	for i := range staticInboundIPs {
+		staticInboundIPs[i] = strings.TrimSpace(staticInboundIPs[i])
 	}
 
 	firewallName := os.Getenv("FIREWALL_NAME")
@@ -75,14 +81,15 @@ func updateInboundAddresses(f godo.Firewall, port string, ownIP string) godo.Fir
 	newFirewall := f
 	for _, r := range newFirewall.InboundRules {
 		if r.PortRange == port {
-			r.Sources.Addresses = []string{staticInboundIP, ownIP}
+			staticInboundIPs = append(staticInboundIPs, ownIP)
+			r.Sources.Addresses = staticInboundIPs
 		}
 	}
 	return newFirewall
 }
 
 func getIP() (string, error) {
-	urlStr := "http://ifconfig.me"
+	urlStr := "https://ipv4.icanhazip.com/"
 
 	client := &http.Client{}
 	req, _ := http.NewRequest("GET", urlStr, nil)
