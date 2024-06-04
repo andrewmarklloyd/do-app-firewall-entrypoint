@@ -40,6 +40,8 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	fmt.Println("found own IP:", ownIP)
+
 	client := godo.NewFromToken(os.Getenv("DO_ACCESS_TOKEN"))
 	ctx := context.Background()
 	f, err := getFirewall(ctx, client, firewallName)
@@ -48,6 +50,7 @@ func main() {
 	}
 
 	newFirewall := updateInboundAddresses(f, firewallPort, ownIP)
+	fmt.Println("using new firewall: ", newFirewall)
 
 	_, _, err = client.Firewalls.Update(ctx, newFirewall.ID, &godo.FirewallRequest{
 		Name:          newFirewall.Name,
