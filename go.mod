@@ -1,6 +1,7 @@
 module github.com/andrewmarklloyd/do-app-firewall-entrypoint
 
-go 1.22
+go 1.23.3
+
 toolchain go1.24.1
 
 require github.com/digitalocean/godo v1.142.0
