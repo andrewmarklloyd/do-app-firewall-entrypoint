@@ -36,7 +36,7 @@ unset DO_ACCESS_TOKEN
 
 Then include the `do-app-firewall-entrypoint` tool:
 ```
-FROM golang:1.22-alpine as builder
+FROM golang:1.23-alpine as builder
 RUN go install github.com/andrewmarklloyd/do-app-firewall-entrypoint@latest
 ...
 COPY entrypoint.sh /entrypoint.sh
