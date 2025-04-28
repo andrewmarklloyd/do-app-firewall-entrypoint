@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -99,7 +99,7 @@ func getIP() (string, error) {
 		return "", fmt.Errorf("making request to get own ip address: %s", err)
 	}
 
-	resBody, err := ioutil.ReadAll(resp.Body)
+	resBody, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return "", fmt.Errorf("reading response body from getting own ip address: %s", err)
 	}
