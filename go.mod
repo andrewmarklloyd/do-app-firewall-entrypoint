@@ -4,7 +4,7 @@ go 1.23.3
 
 toolchain go1.24.1
 
-require github.com/digitalocean/godo v1.144.0
+require github.com/digitalocean/godo v1.145.0
 
 require (
 	github.com/google/go-querystring v1.1.0 // indirect
