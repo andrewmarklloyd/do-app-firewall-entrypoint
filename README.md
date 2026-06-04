@@ -13,7 +13,7 @@ FIREWALL_NAME: name of the firewall in Digital Ocean to update
 
 FIREWALL_PORT: port of the firewall to match against
 
-DO_ACCESS_TOKEN: access token to update the Digital Ocean firewall
+DO_ACCESS_TOKEN: access token to update the Digital Ocean firewall. Permissions needed: firewall:read, firewall:update, tag:read, droplet:read
 ```
 
 ## Example
